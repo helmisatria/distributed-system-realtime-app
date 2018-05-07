@@ -1,0 +1,36 @@
+{
+  "pesanan": [
+    {
+      "menu": "3",
+      "jumlah": "1",
+      "timestamp": "2018-05-07T17:42:02.513Z",
+      "id": 1
+    },
+    {
+      "menu": "1",
+      "jumlah": "1",
+      "timestamp": "2018-05-07T17:49:50.324Z",
+      "id": 2
+    }
+  ],
+  "menu": [
+    {
+      "id": 1,
+      "harga": 1000,
+      "nama": "Nasi Goreng",
+      "stok": 96
+    },
+    {
+      "id": 2,
+      "harga": 1200,
+      "nama": "Mie Goreng",
+      "stok": 100
+    },
+    {
+      "id": 3,
+      "harga": 1500,
+      "nama": "Nasi Kolor",
+      "stok": 79
+    }
+  ]
+}

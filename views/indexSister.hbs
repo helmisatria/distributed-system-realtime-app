@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/sister.css">
+  <title>Bakmi Sister</title>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Stok Bakmi</h2>
+    <div id="data">
+
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
+
+  <script>
+    const socket = io();
+    var DATA
+    socket.emit('getMenu')
+
+    socket.on('receiveMenu', ({ data }) => {
+      DATA = data
+
+      data.forEach(({ id, nama, harga, stok }) => {
+        $('#data')
+          .append(`
+            <div class="menuItem">
+              <div class="item">
+                <span id="nama">${nama}</span> <br>
+                <span id="harga">Rp ${harga},-</span>
+              </div>
+              <div class="item stok">
+                <p>Stok:
+                  <span id="${id}" class="count">${stok}</span>
+                </p>
+              </div>
+            </div>
+            <hr>
+          `)
+      })
+    })
+
+    socket.on('updateStok', ({ harga, id, stok, nama }) => {
+      console.log('====================================');
+      console.log({ harga, id, stok, nama });
+      console.log('====================================');
+
+      $(`#${id}`).text(stok)
+
+    })
+  </script>
+</body>
+
+</html>

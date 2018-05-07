@@ -1,0 +1,21 @@
+.menuItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+
+.item.stok {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.count {
+  font-size: 5em !important;
+  font-weight: bold; }
+
+#nama {
+  font-size: 30px; }
+
+#harga {
+  font-size: 18px;
+  color: #757575; }

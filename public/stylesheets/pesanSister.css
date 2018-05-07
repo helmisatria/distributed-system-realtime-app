@@ -1,0 +1,31 @@
+.pesanSister {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+  width: 100vw;
+  padding: 0 10em;
+  flex-direction: column; }
+
+.harga {
+  padding: 1em;
+  background-color: #f0f0f0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+#harga {
+  font-size: 3em; }
+
+#pesanBtn {
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 10em; }
+
+.content {
+  width: 100%; }
+
+@media (max-width: 767px) {
+  .pesanSister {
+    padding: 0; } }
