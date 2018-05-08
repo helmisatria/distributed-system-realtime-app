@@ -76,13 +76,15 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('generateStok', async () => {
-    const menus = await axios.get(`${URL}/menu`);
+    let menus = await axios.get(`${URL}/menu`);
 
     menus.data.forEach(async (menu) => {
       await axios.patch(`${URL}/menu/${menu.id}`, {
         stok: _.random(10, 20),
       });
     });
+    menus = await axios.get(`${URL}/menu`);
+    io.sockets.emit('receiveMenu', { data: menus.data });
   });
 });
 
