@@ -8,6 +8,7 @@ const sassMiddleware = require('node-sass-middleware');
 const cors = require('cors');
 const axios = require('axios');
 const moment = require('moment');
+const _ = require('lodash');
 
 const index = require('./routes/index');
 
@@ -33,7 +34,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const io = require('socket.io').listen(app.listen(8080));
 
-const URL = 'http://localhost:3000';
+let URL;
+
+if (process.env.PORT) {
+  URL = `http://localhost:${process.env.PORT}`;
+} else {
+  URL = 'http://localhost:3000';
+}
 
 app.use((req, res, next) => {
   req.io = io;
@@ -66,6 +73,16 @@ io.sockets.on('connection', (socket) => {
     await axios.post(`${URL}/pesanan/`, submit);
 
     return io.sockets.emit('updateStok', stok.data);
+  });
+
+  socket.on('generateStok', async () => {
+    const menus = await axios.get(`${URL}/menu`);
+
+    menus.data.forEach(async (menu) => {
+      await axios.patch(`${URL}/menu/${menu.id}`, {
+        stok: _.random(10, 20),
+      });
+    });
   });
 });
 

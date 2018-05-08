@@ -12,11 +12,10 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" id="index">
     <h2>Stok Bakmi</h2>
-    <div id="data">
-
-    </div>
+    <button class="btn blue lighten-2" id="generate" onclick="generateStok()">Generate</button>
+    <div id="data"></div>
   </div>
 
 
@@ -33,6 +32,7 @@
     socket.on('receiveMenu', ({ data }) => {
       DATA = data
 
+      $('#data').empty()
       data.forEach(({ id, nama, harga, stok }) => {
         $('#data')
           .append(`
@@ -53,12 +53,20 @@
     })
 
     socket.on('updateStok', ({ harga, id, stok, nama }) => {
-      console.log('====================================');
-      console.log({ harga, id, stok, nama });
-      console.log('====================================');
-
       $(`#${id}`).text(stok)
+    })
 
+    function generateStok() {
+      console.log('hoam');
+
+      socket.emit('generateStok')
+
+      socket.emit('getMenu')
+
+    }
+
+    socket.on('generateStok', (data) => {
+      console.log(data)
     })
   </script>
 </body>
